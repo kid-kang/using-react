@@ -1,24 +1,23 @@
-import { ProTable, ProForm, ProFormText } from '@ant-design/pro-components';
+import { ProTable, ProForm, ProFormText, type ActionType } from '@ant-design/pro-components';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Drawer, Button } from 'antd';
-import { useState } from 'react';
-import { columns, fetchData, type ProTableDataItem } from './config';
-
-const editRow = (row: ProTableDataItem) => {
-  console.log('编辑保存: ', row);
-  return fetchData({
-    pageSize: 10,
-    current: 1,
-  });
-};
+import { useState, useRef } from 'react';
+import { columns, fetchData, type TableHeadType } from './config';
 
 export default function AntdProTable() {
   const [open, setOpen] = useState(false);
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() => []);
+  const proTableRef = useRef<ActionType>();
+
+  const editRow = async (row: TableHeadType) => {
+    console.log('编辑保存: ', row);
+    // updateApi(row)  发起更新请求
+    await proTableRef.current?.reload();
+  };
 
   return (
     <div style={{ padding: '0 100rem' }}>
       <ProTable
+        rowKey='key' // 绑定行的关键字, 我写的是key,有些例子用的是id
         headerTitle='个人信息查询'
         cardBordered // 板块板框
         columns={columns} // 列配置
@@ -42,12 +41,9 @@ export default function AntdProTable() {
         //   return <div>自定义勾选操作</div>;
         // }}
 
+        actionRef={proTableRef} // 有时我们要手动触发table的reload等操作，可以使用actionRef
         editable={{
           // 配置row可编辑
-          // editableKeys,
-          onChange: (e, a) => {
-            console.log(e, a);
-          },
           type: 'single', // 能同时编辑多行还是单行 single | multiple
           actionRender: (row, config, defaultDom) => {
             console.log('actionRender', row, config);
@@ -74,4 +70,20 @@ export default function AntdProTable() {
   );
 }
 
-// actionRef.current.reload()   //刷新表格，触发request属性拉取最新数据
+// //刷新表格，触发request属性拉取最新数据
+// ref.current.reload();
+
+// // 刷新并清空,页码也会重置，不包括表单
+// ref.current.reloadAndRest();
+
+// // 重置到默认值，包括表单
+// ref.current.reset();
+
+// // 清空选中项
+// ref.current.clearSelected();
+
+// // 开始编辑
+// ref.current.startEditable(rowKey);
+
+// // 结束编辑
+// ref.current.cancelEditable(rowKey);
