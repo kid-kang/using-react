@@ -58,6 +58,7 @@ export const columns: ProColumns<ProTableDataItem>[] = [
   {
     title: '序号',
     valueType: 'indexBorder', //indexBorder就是proTable自动帮你生成的1，2，3，4的序号
+    editable: false, // 控制该列不能编辑
   },
   {
     // fixed: 'left', // 固定列
@@ -84,6 +85,7 @@ export const columns: ProColumns<ProTableDataItem>[] = [
     dataIndex: 'sex',
     key: 'sex',
     valueType: 'select', // 定义搜索表单类型
+    align: 'center', // 表头文字水平居中
     filters: true, //表头的筛选菜单项，当值为 true 时，自动使用 valueEnum 生成
     // onFilter不会触发request! 只是静态筛选符合的, 返回的值为false会过滤掉,每条数据都会判断
     onFilter: true, // 同等于下面操作
@@ -108,6 +110,7 @@ export const columns: ProColumns<ProTableDataItem>[] = [
     dataIndex: 'age',
     key: 'age',
     search: false,
+    align: 'center',
     renderText: (val: number) => `${val} 岁`, // 展示数据额外文字
     sorter: (a, b) => a.age - b.age, // 默认排序
   },
@@ -116,6 +119,7 @@ export const columns: ProColumns<ProTableDataItem>[] = [
     dataIndex: 'address',
     key: 'address',
     search: false,
+    align: 'center',
     ellipsis: true, // 设置 ellipsis 可以让单元格内容根据宽度自动省略。
   },
   {
@@ -123,19 +127,20 @@ export const columns: ProColumns<ProTableDataItem>[] = [
     dataIndex: 'phone',
     key: 'phone',
     search: false,
+    align: 'center',
   },
   {
     title: '操作',
     key: 'action',
+    align: 'center',
     valueType: 'option', // 该类型不会产生搜索表单
-    align: 'center', // 表头文字水平居中
     // fixed: 'right', // 固定列
-    render: (dom, record, _, action) => {
+    render: (_, record, __, action) => {
       // render为自定义渲染, record为当前行数据
       return (
         <Button
+          key='editable'
           onClick={() => {
-            console.log(dom);
             action?.startEditable?.(record.key);
           }}
         >

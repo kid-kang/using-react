@@ -4,17 +4,17 @@ import { Drawer, Button } from 'antd';
 import { useState } from 'react';
 import { columns, fetchData, type ProTableDataItem } from './config';
 
+const editRow = (row: ProTableDataItem) => {
+  console.log('编辑保存: ', row);
+  return fetchData({
+    pageSize: 10,
+    current: 1,
+  });
+};
+
 export default function AntdProTable() {
   const [open, setOpen] = useState(false);
-
-  function editRow(row: ProTableDataItem) {
-    console.log('row: ', row);
-    return fetchData({
-      pageSize: 10,
-      current: 1,
-      sex: '男',
-    });
-  }
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() => []);
 
   return (
     <div style={{ padding: '0 100rem' }}>
@@ -44,9 +44,13 @@ export default function AntdProTable() {
 
         editable={{
           // 配置row可编辑
+          // editableKeys,
+          onChange: (e, a) => {
+            console.log(e, a);
+          },
           type: 'single', // 能同时编辑多行还是单行 single | multiple
           actionRender: (row, config, defaultDom) => {
-            console.log(1111, row, config, defaultDom);
+            console.log('actionRender', row, config);
             return [defaultDom.save, defaultDom.cancel];
           },
           onSave: (_, row) => editRow(row),
