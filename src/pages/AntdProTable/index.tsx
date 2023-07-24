@@ -21,7 +21,7 @@ export default function AntdProTable() {
         headerTitle='个人信息查询'
         cardBordered // 板块板框
         columns={columns} // 列配置
-        pagination={{ pageSize: 5 }} // 用于配置分页功能的相关参数，包括当前页码、每页显示的数据条数、总数据条数等
+        pagination={{ pageSize: 10 }} // 用于配置分页功能的相关参数，包括当前页码、每页显示的数据条数、总数据条数等
         // params={params} // 额外设置request的请求参数
         // search={false}  // false为不展示搜索板块, 也可以传入搜索按钮部分的配置
         // options={false} // 用于配置表格的一些基本选项。这个属性可以设置为一个对象，包含多个选项，用于控制表格的分页、密度、搜索、导出等功能。

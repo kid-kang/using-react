@@ -102,7 +102,7 @@ export const columns: ProColumns<TableHeadType>[] = [
     align: 'center',
     valueType: 'digit',
     // renderText: (val: number) => `${val} 岁`, // 展示数据额外文字, 可编辑时慎用!!!
-    sorter: true, // 设置可排序
+    sorter: (a, b) => a.age - b.age, // 设置可排序
   },
   {
     title: '住址',
@@ -181,7 +181,7 @@ function getData(sex: '男' | '女' | undefined) {
       name: `wzk${i}`,
       age: i,
       sex: i % 2 === 0 ? '男' : '女',
-      address: 'dasdhasiodhkasdksa',
+      address: '江苏省常州市武进区湖塘路韭田人才公寓0001号',
       image: imgArr[i % 3],
       time: '2020-05-26',
     });
