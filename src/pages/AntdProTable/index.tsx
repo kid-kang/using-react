@@ -1,23 +1,23 @@
-import { ProTable, ProForm, ProFormText, type ActionType } from '@ant-design/pro-components';
-import { PlusCircleOutlined } from '@ant-design/icons';
-import { Drawer, Button } from 'antd';
-import { useState, useRef } from 'react';
-import { columns, fetchData, type TableHeadType } from './config';
+import { ProTable, ProForm, ProFormText, type ActionType } from '@ant-design/pro-components'
+import { PlusCircleOutlined } from '@ant-design/icons'
+import { Drawer, Button } from 'antd'
+import { useState, useRef } from 'react'
+import { columns, fetchData, type TableHeadType } from './config'
 
 export default function AntdProTable() {
-  const [open, setOpen] = useState(false);
-  const proTableRef = useRef<ActionType>();
+  const [open, setOpen] = useState(false)
+  const proTableRef = useRef<ActionType>()
 
   const editRow = async (row: TableHeadType) => {
-    console.log('编辑保存: ', row);
+    console.log('编辑保存: ', row)
     // updateApi(row)  发起更新请求
-    await proTableRef.current?.reload();
-  };
+    await proTableRef.current?.reload()
+  }
 
   return (
     <div style={{ padding: '0 100rem' }}>
       <ProTable
-        rowKey='key' // 绑定行的关键字, 我写的是key,有些例子用的是id
+        rowKey='key' // 绑定行数据的唯一值, 我写的是key,有些例子用的是id
         headerTitle='个人信息查询'
         cardBordered // 板块板框
         columns={columns} // 列配置
@@ -46,8 +46,8 @@ export default function AntdProTable() {
           // 配置row可编辑
           type: 'single', // 能同时编辑多行还是单行 single | multiple
           actionRender: (row, config, defaultDom) => {
-            console.log('actionRender', row, config);
-            return [defaultDom.save, defaultDom.cancel];
+            console.log('actionRender', row, config)
+            return [defaultDom.save, defaultDom.cancel]
           },
           onSave: (_, row) => editRow(row),
         }}
@@ -67,7 +67,7 @@ export default function AntdProTable() {
         </ProForm>
       </Drawer>
     </div>
-  );
+  )
 }
 
 // //刷新表格，触发request属性拉取最新数据
