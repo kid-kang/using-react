@@ -17,13 +17,13 @@
 | 8.10 | Nest.js是用于构建高效且可伸缩的服务端应用程序的渐进式 Node.js 框架。<br />ssr的存在的问题：额外的错误实时监控，没有加载完js之前用户会无法交互，不容易切分预加载数据和异步加载数据 |
 | 8.11 | 一键复制功能：<br />navigator.cilpboard.writeText('text') // 作为document.execCommand("copy")的替代品，只适用于https<br /> |
 | 8.12 |                                                              |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
+| 8.19 | useImperativeHandle   forwardRef  新学的两个hook             |
+| 8.21 | umijs自动生产的文件有缓存   出问题了可以删掉                 |
+| 8.21 | https://www.jianshu.com/p/0ff38a3ac40c    react阻止冒泡      |
+| 8.24 | antd的 Drawer  组件的 footer属性值是数组， 且每项需要加key   |
+| 8.25 | 学会了antd动态增减表单项                                     |
+| 8.29 | getPopupContainer={(triggerNode) => triggerNode.parentElement} 属性让Select 下拉滚动不跟随body而跟随父节点 |
+| 8.30 | 学会了下拉远程搜索框                                         |
 |      |                                                              |
 |      |                                                              |
 |      |                                                              |
