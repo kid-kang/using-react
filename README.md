@@ -1,6 +1,12 @@
 # starcharge-daily
 > 在星星充电的日子 - 记录学到了什么 - 每次进步一点点
 
+
+
+search={{ labelWidth: "auto", collapseRender: false, collapsed: false }}
+
+getPopupContainer={(triggerNode) => triggerNode.parentElement}
+
 ## 2023年
 
 | 日期 |                                                              |
@@ -16,7 +22,6 @@
 | 8.9  | useCallback(fn，[yilai]) 钩子的作用，缓存函数，让其不重新定义 |
 | 8.10 | Nest.js是用于构建高效且可伸缩的服务端应用程序的渐进式 Node.js 框架。<br />ssr的存在的问题：额外的错误实时监控，没有加载完js之前用户会无法交互，不容易切分预加载数据和异步加载数据 |
 | 8.11 | 一键复制功能：<br />navigator.cilpboard.writeText('text') // 作为document.execCommand("copy")的替代品，只适用于https<br /> |
-| 8.12 |                                                              |
 | 8.19 | useImperativeHandle   forwardRef  新学的两个hook             |
 | 8.21 | umijs自动生产的文件有缓存   出问题了可以删掉                 |
 | 8.21 | https://www.jianshu.com/p/0ff38a3ac40c    react阻止冒泡      |
@@ -24,12 +29,12 @@
 | 8.25 | 学会了antd动态增减表单项                                     |
 | 8.29 | getPopupContainer={(triggerNode) => triggerNode.parentElement} 属性让Select 下拉滚动不跟随body而跟随父节点 |
 | 8.30 | 学会了下拉远程搜索框                                         |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
-|      |                                                              |
+| 9.1  | 如果您正在使用的下载工具或网站只支持HTTPS协议，那么您只能使用HTTPS版本的链接进行下载。如果您想下载HTTP版本的链接，您需要手动更改链接中的协议类型 |
+| 9.5  | 学的教训啊，千万别用函数返回组建渲染，响应式回可能丢失       |
+| 9.6  | antd Form组件属性 autoComplete="off"  取消自动显示历史记录   js原生的话c小写 |
+| 9.6  | Form.List的{ name: 0, key: 0, isListField: true, fieldKey: 0 } key是一直增加的  name相当于是下标 |
+| 9.7  | InputNumber的 formatter={(value) => Math.floor(value)} 可以转成整数 |
+| 9.8  | Select组件的optionLabelProp="label"属性配合Option组件使用  被选择的展示成Option的label，label可自定义 |
 |      |                                                              |
 |      |                                                              |
 |      |                                                              |
