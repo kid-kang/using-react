@@ -285,3 +285,81 @@ export function useIntlMsg(key) {
 - 3级大类表单联动
 - 组件拆分
 - 0acd6f7: feat: 提示文案统一管理
+
+### 业务组件封装
+
+antd Select 带远程搜索且能无限滚动
+
+```js
+import React, { useState, useEffect, useRef } from 'react';  
+import { Select, notification } from 'antd';  
+import InfiniteScroll from 'react-infinite-scroller';  
+import LoadingIcon from './LoadingIcon'; // 你的加载图标组件  
+  
+const { Option } = Select;  
+  
+const RemoteSearchSelect = ({ loadOptions }) => {  
+  const [options, setOptions] = useState([]);  
+  const [loading, setLoading] = useState(false);  
+  const [page, setPage] = useState(1);  
+  const [search, setSearch] = useState('');  
+  const scrollTarget = useRef(null); // 创建一个ref来存储滚动目标的DOM元素  
+  
+  useEffect(() => {  
+    if (scrollTarget.current) {  
+      // 在每次渲染时，重新绑定滚动事件  
+      scrollTarget.current.addEventListener('scroll', handleScroll);  
+    }  
+  }, []);  
+  
+  const handleScroll = () => {  
+    // 判断滚动到底部时加载更多数据  
+    if (scrollTarget.current && scrollTarget.current.scrollHeight - scrollTarget.current.scrollTop <= 100) {  
+      setLoading(true);  
+      setPage(page + 1);  
+    }  
+  };  
+  
+  const handleSearch = value => {  
+    setSearch(value);  
+    setPage(1);  
+    setOptions([]);  
+  };  
+  
+  const loadMoreOptions = () => {  
+    if (!loading) {  
+      setLoading(true);  
+      loadOptions(page, search).then(result => {  
+        if (result.status === 'success') {  
+          setOptions(prevOptions => [...prevOptions, ...result.data]);  
+          setLoading(false);  
+        } else {  
+          notification.error({ message: result.message });  
+          setLoading(false);  
+        }  
+      });  
+    }  
+  };  
+  
+  return (  
+    <div ref={scrollTarget}>  
+      <Select  
+        showSearch  
+        placeholder="Select an option"  
+        defaultActiveFirstOption={false}  
+        showArrow={false}  
+        filterOption={false}  
+        onSearch={handleSearch}  
+        notFoundContent={loading ? <LoadingIcon /> : null} // 使用LoadingIcon作为加载中的提示内容  
+        onLoadMore={loadMoreOptions} // 绑定无限滚动的加载更多方法  
+      >  
+        {options.map(option => (  
+          <Option key={option.value}>{option.value}</Option>  
+        ))}  
+      </Select>  
+    </div>  
+  );  
+};
+```
+
+### 重构项目的菜单权限，接入数据埋点采集
